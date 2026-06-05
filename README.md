@@ -135,7 +135,7 @@ crontab -e
 
 # add this line to start the scripts after reboot with a 60 second delay
 @reboot sleep 60 && /home/ibuglab/dht-env/venv/bin/python /home/ibuglab/pollincam/dht22.py
-@reboot sleep 60 && /usr/bin/python3 /home/ibuglab/pollin-cam/camera-trap.py
+@reboot sleep 60 && /usr/bin/python3 /home/ibuglab/pollin-cam/pollincam.py
 ```
 
 Save and exit the crontab. Our scripts are successfully scheduled to startup as soon as the Pi boots up in the morning (+ a 1 minute delay to ensure the device unit boots).  
