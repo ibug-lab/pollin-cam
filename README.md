@@ -1,5 +1,5 @@
 <div align="center">
-<img src="media/sticker.png" style="width: 400px; height: auto;">
+<img src="media/pollin-cam-sticker.png" style="width: 400px; height: auto;">
 </div>
 
 # Autonomous plant-pollinator camera trap for research
