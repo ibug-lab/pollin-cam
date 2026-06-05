@@ -22,11 +22,11 @@ MIN_CONTOUR_AREA = 30
 MOTION_COOLDOWN = 5
 
 # Burst capture settings
-BURST_COUNT = 5
+BURST_COUNT = 3
 BURST_DELAY = 0.4
 
 # Base directory on USB drive
-BASE_SAVE_DIR = "/home/ibuglab/pollincam-01/
+BASE_SAVE_DIR = "/home/ibuglab/pollincam-01/"
 
 # ==================================================
 
