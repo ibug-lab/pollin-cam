@@ -37,8 +37,8 @@ Use the Raspberry Pi Imager software to install the recommended operating system
 
 For customizations, you will need to define:
 
-1. Hostname: use `bombuscam-XX` Replace the `XX` with the next sequence of defined in the lab pi asset tracking spreadsheet.
-2. Username: use `bombus`
+1. Hostname: use `pollincam-XX` Replace the `XX` with the next sequence of defined in the lab pi asset tracking spreadsheet.
+2. Username: use `ibuglab`
 3. Password: use standard lab password for devices (see asset tracking spreadsheet)
 4. WiFi network: use either personal hotspot or local network that you have full access to (we can later swap to Eduroam or other networks). If neither hotspot or local network is available, leave blank for now and manually configure using keyboard/mouse/monitor after completing the rest of this guide.
 5. Enable SSH using password authentication (this is to enable remote access using the device password above)
@@ -76,7 +76,7 @@ sudo sh install.sh
 After the installation, we'll setup the web interface to adjust the schedule for startup/shutdown. 
 
 ```bash
-sudo home/bombus/uwi/diagnose.sh
+sudo home/ibuglab/uwi/diagnose.sh
 ```
 
 This will configure the web interface and provide the URL to access the Witty Pi device and enter the scheduling information. Once you have accessed the Witty Pi UI, select "Schedule Script" and paste in:
@@ -118,13 +118,13 @@ build-essential \
 swig \
 liblgpio-dev
 
-python3 -m venv /home/bombus/dht-env
-source /home/bombus/dht-env/bin/activate
+python3 -m venv /home/ibuglab/dht-env
+source /home/ibuglab/dht-env/bin/activate
 
 pip install lgpio
 pip install adafruit-blinka
 pip install adafruit-circuitpython-dht
-python home/bombus/bombuscam/dht22.py # this starts the script
+python home/ibuglab/pollin-cam/dht22.py # this starts the script
 ```
 
 ## 6. Setup CRONTAB events for all camera trap scripts 📅
@@ -134,8 +134,8 @@ Using the Witty Pi will start up and shutdown the Pi automatically to save on ba
 crontab -e
 
 # add this line to start the scripts after reboot with a 60 second delay
-@reboot sleep 60 && /home/bombus/dht-env/venv/bin/python /home/bombus/bombuscam/dht22.py
-@reboot sleep 60 && /usr/bin/python3 /home/bombus/bombuscam/camera-trap.py
+@reboot sleep 60 && /home/ibuglab/dht-env/venv/bin/python /home/ibuglab/pollincam/dht22.py
+@reboot sleep 60 && /usr/bin/python3 /home/ibuglab/pollin-cam/camera-trap.py
 ```
 
 Save and exit the crontab. Our scripts are successfully scheduled to startup as soon as the Pi boots up in the morning (+ a 1 minute delay to ensure the device unit boots).  
