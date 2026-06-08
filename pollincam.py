@@ -10,8 +10,8 @@ from datetime import datetime
 CAMERA_INDEX = 0
 
 # Full-resolution saved images
-CAPTURE_WIDTH = 2304
-CAPTURE_HEIGHT = 1296
+CAPTURE_WIDTH = 3840
+CAPTURE_HEIGHT = 2160
 
 # Motion detection resolution
 PROCESS_WIDTH = 1024
@@ -26,7 +26,8 @@ BURST_COUNT = 3
 BURST_DELAY = 0.4
 
 # Base directory on USB drive
-BASE_SAVE_DIR = "/home/ibuglab/pollincam-01/"
+# This will need to be adjusted to match the unit name/number
+BASE_SAVE_DIR = "/media/pollincam-01/"
 
 # ==================================================
 
