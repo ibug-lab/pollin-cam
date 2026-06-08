@@ -33,7 +33,7 @@ Prototype trap deployed | Trap imaging surface
 
 ## 2. Operating system and software 💿
 ### Imaging MicroSD card
-Use the Raspberry Pi Imager software to install the recommended operating system for the Raspberry Pi Zero 2W on the microSD card (but opt for the *32-bit* version for this particular iteration of the camera trap to save memory.
+Use the Raspberry Pi Imager software to install the recommended operating system for the Raspberry Pi Zero 2W on the microSD card, but opt for the *32-bit* version of Debian Trixie for this particular iteration of the camera trap to save memory.
 
 For customizations, you will need to define:
 
@@ -45,7 +45,7 @@ For customizations, you will need to define:
 6. Enable Raspberry Pi Connect (additional remote access capabilities including screen sharing). You will need to open and sign in to our lab's Raspberry Pi connect account in order to obtain the authentication token. Account details are in the iBUG Pi asset spreadsheet.
 
 ### Updates and dependency installation
-Once the microSD card is flashed with the OS, install it in the Pi and boot it up. If the Pi is autoconnecting to available hotspot or wifi, login to Raspberry Pi Connect and then login to the device using a remote shell connection (i.e., terminal window). If the device is not on the network, use a keyboard/mouse and monitor to open a terminal window and execute the following:
+Once the microSD card is flashed with the OS, install it in the Pi and boot it up. If the Pi is auto-connecting to available hotspot or wifi, login to Raspberry Pi Connect and then login to the device using a remote shell connection (i.e., terminal window). If the device is not on the network, use a keyboard/mouse and monitor to open a terminal window and execute the following:
 
 ```bash
 sudo apt update
