@@ -9,7 +9,7 @@ from datetime import datetime
 dht_device = adafruit_dht.DHT22(board.D27)
 
 # --- CSV file name ---
-csv_file = "/home/ibuglab/pollincam-01/ambient-temps.csv"
+csv_file = "/media/pollincam-01/ambient-temps.csv"
 
 # --- Create CSV file with header if it doesn't exist ---
 try:
