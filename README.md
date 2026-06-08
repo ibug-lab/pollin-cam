@@ -99,7 +99,46 @@ Next, set the low voltage setting to 3V. This ensures that the Pi gracefully shu
 
 The USB thumb drive we use contains 500gb of space where we will store all of our captured images. We'll first reformat/re-partition the drive and then modify a script to ensure the drive automounts each time the Pi boots up in the morning. 
 
+First, confirm what the external drive is: 
 
+```bash
+lsblk
+```
+
+It *should* be `/dev/sda` (500GB disk) that has a single partition in it. Next, we'll delete the existing partitions and create a new one:
+
+```bash
+sudo parted -s /dev/sda mklabel gpt
+sudo parted -s /dev/sda mkpart primary ext4 0% 100%
+
+# adjust `pollincam-01` with appropriate unit name/number
+sudo mkfs.ext4 -L pollincam-01 /dev/sda1 
+```
+
+Now we'll create a mount point on the Pi for the device. Adjust the `pollincam-01` name a number appropriately. 
+
+```bash
+sudo mkdir -p /mnt/pollincam-01
+```
+
+Next, we'll add the device to to a file so that it automatically mounts upon startup. From this, copy the UUID of the device. The output will look like: `/dev/sda1: UUID="1234abcd-5678-efgh-9012-ijkl34567890" TYPE="ext4"`
+
+```bash
+sudo blkid /dev/sda1
+sudo nano /etc/fstab
+
+# To the fstab file, add this at the bottom (adjust UUID to match)
+UUID=1234abcd-5678-efgh-9012-ijkl34567890  /mnt/pollincam-01  ext4  defaults,nofail  0  2
+```
+
+Save and exit the fstab file, and then test the mount:
+
+```bash
+sudo mount -a
+df -h
+
+# Should see: /dev/sda1       500G  1G  499G   1% /mnt/pollincam-01
+```
 
 ## 5. DHT22 configuration 🌡️
 The DHT22 is a temperature/humidity sensor to record environmental conditions at the trap. To configure it, first ensure that the sensor is correctly installed on the GPIO pins of the Pi (see diagram below). 
