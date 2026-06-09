@@ -140,7 +140,16 @@ df -h
 # Should see: /dev/sda1       500G  1G  499G   1% /mnt/pollincam-01
 ```
 
-## 5. DHT22 configuration 🌡️
+## 5. Clone Github repository to the Pi
+Now we'll clone this repo to the Pi so that we have the requisite scripts to test and run both the DHT22 sensor (`dht22.py`) and camera trap script (`pollincam.py`).
+
+```bash
+git clone https://github.com/ibug-lab/pollin-cam.git
+```
+
+This will create a directory (folder) inside our home folder called `pollin-cam` where our scripts will be housed. 
+
+## 6. DHT22 configuration 🌡️
 The DHT22 is a temperature/humidity sensor to record environmental conditions at the trap. To configure it, first ensure that the sensor is correctly installed on the GPIO pins of the Pi (see diagram below). 
 
 <div align="center">
@@ -166,7 +175,7 @@ pip install adafruit-circuitpython-dht
 python home/ibuglab/pollin-cam/dht22.py # this starts the script
 ```
 
-## 6. Setup CRONTAB events for all camera trap scripts 📅
+## 7. Setup CRONTAB events for all camera trap scripts 📅
 Using the Witty Pi will start up and shutdown the Pi automatically to save on battery overnight. Because of this, we'll need to configure our Pi to automatically start our camera trap and temperature/humidity sensor script automatically each time the Pi boots up in the morning. For this, we'll use crontab, which is a job scheduler.
 
 ```
