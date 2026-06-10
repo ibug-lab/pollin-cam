@@ -99,6 +99,7 @@ Click save, and then refresh the UI. You should now see the `Next Shutdown` and 
 Next, set the low voltage setting to 3V. This ensures that the Pi gracefully shuts down if/when the battery is drained and voltage begins to drop. 
 
 ## 4. External hard drive configuration (USB thumb-drive) 💽
+### Using terminal:
 
 The USB thumb drive we use contains 500gb of space where we will store all of our captured images. We'll first reformat/re-partition the drive and then modify a script to ensure the drive automounts each time the Pi boots up in the morning. 
 
@@ -142,6 +143,9 @@ df -h
 
 # Should see: /dev/sda1       500G  1G  499G   1% /mnt/pollincam-01
 ```
+
+### Using Gparted
+Launch screen sharing to the device via Raspberry Pi Connect...
 
 ## 5. Clone Github repository to the Pi
 Now we'll clone this repo to the Pi so that we have the requisite scripts to test and run both the DHT22 sensor (`dht22.py`) and camera trap script (`pollincam.py`).
