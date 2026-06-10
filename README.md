@@ -86,8 +86,8 @@ This will configure the web interface and provide the URL to access the Witty Pi
 BEGIN 2026-06-01 06:00:00
 END   2035-12-31 20:00:00
 
-ON  H14 # On for 14 hours
-OFF H10 # Off for 10 hours
+ON  H14
+OFF H10 
 
 ```
 
