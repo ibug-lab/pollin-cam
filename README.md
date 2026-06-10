@@ -64,9 +64,6 @@ python3-flask \
 python3-numpy \
 v4l-utils \
 python3-opencv
-
-# Then run this
-pip3 install imutils
 ```
 
 ## 3. Witty Pi 4 mini configuration 🔋
@@ -145,7 +142,45 @@ df -h
 ```
 
 ### Using Gparted
-Launch screen sharing to the device via Raspberry Pi Connect...
+Launch screen sharing to the device via Raspberry Pi Connect. Under the Pi menu, go to System Tools and launch "GParted". From here, select the external drive from the dropdown in the upper right, and then select the partition. Go to partition --> delete partition. Then, partition --> create partitition. Keep all the default settings and only enter the label, which should be the device name (e.g., `pollincam-01`). Once you're done with that, go to edit --> apply all operations. This will take a few minutes to create the new partition table on the device. 
+
+Next, we'll create the mounting point for the hard drive. Adjust the directory name below to match the device name.
+
+```bash
+mkdir pollincam-01
+```
+
+We'll now add the hard drive to the file system table (fstab). Run the following code, and copy the UUID for the hard drive we just partitioned.
+
+```bash
+sudo lsblk -o UUID,NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL,MODEL
+```
+
+Next, open the fstab file and add the hard drive... 
+
+```bash
+sudo nano /etc/fstab
+```
+At the end of this file, add 
+
+```bash
+UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx /home/ibuglab/pollincam-01 ext4 defaults,auto,users,rw,nofail 0 0
+```
+replacing both the UUID with the one you just copied, and adjusting the file path to the directory we just created. 
+
+Next, we'll mount the drive:
+
+```bash
+sudo mount -a
+```
+
+And finally, update the folder permissions so that we can read and write. Adjust the directory name in each of these to match the device:
+
+```bash
+sudo chown ibuglab:ibuglab -R /home/ibuglab/pollincam-01/
+sudo chmod a+rwx /home/ibuglab/pollincam-01/
+sudo chmod -R 775 /home/ibuglab/pollincam-01/
+```
 
 ## 5. Clone Github repository to the Pi
 Now we'll clone this repo to the Pi so that we have the requisite scripts to test and run both the DHT22 sensor (`dht22.py`) and camera trap script (`pollincam.py`).
@@ -153,6 +188,8 @@ Now we'll clone this repo to the Pi so that we have the requisite scripts to tes
 ```bash
 git clone https://github.com/ibug-lab/pollin-cam.git
 ```
+
+Once cloned, we'll need to adjust the file paths in both the `dht22.py` and `pollincam.py` scripts. Open then using `nano` and adjust the file paths to the directory we just created above, should be something like: `/home/ibuglab/pollincam-01"
 
 This will create a directory (folder) inside our home folder called `pollin-cam` where our scripts will be housed. 
 
@@ -172,13 +209,35 @@ python3-dev \
 build-essential \
 swig \
 liblgpio-dev
+```
 
+Next, we'll adjust the raspberry pi configuration file to tell it which GPIO pin we're using. This is key as the WittyPi uses the default 1-wire pin.
+
+```bash
+sudo nano /boot/firmware/config.txt
+```
+
+To the end of this file, add:
+
+```bash
+dtoverlay=w1-gpio,gpiopin=27
+```
+
+Save and exit.
+
+Next, we'll create a virtual environment to run the script, install the packages that talk to the sensor, and test that it's working:
+
+```bash
+# this creates a virtual environment to run the script:
 python3 -m venv /home/ibuglab/dht-env
 source /home/ibuglab/dht-env/bin/activate
 
+# this installs a few packages to talk to the sensor
 pip install lgpio
 pip install adafruit-blinka
 pip install adafruit-circuitpython-dht
+
+# this runs the script to test if the sensor is working
 python home/ibuglab/pollin-cam/dht22.py # this starts the script
 ```
 
