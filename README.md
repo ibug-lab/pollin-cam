@@ -200,7 +200,7 @@ The DHT22 is a temperature/humidity sensor to record environmental conditions at
 <img src="media/pi-dht.png" style="width: 400px; height: auto;">
 </div>
 
-Next, open a terminal and install the necessary dependencies and initialize a python virtual environment to run the `dht22.py` script. 
+Open a terminal and install the necessary dependencies and initialize a python virtual environment to run the `dht22.py` script. 
 
 ```bash
 sudo apt install -y \
