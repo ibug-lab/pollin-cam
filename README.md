@@ -55,14 +55,17 @@ Accept upgrade installations and wait for the device to update fully. This may t
 
 ```bash
 # GUI for managing disk devices/partitions
+# Install this first
 sudo apt-get install gparted
 
+# Then run this section of code
 sudo apt install -y \
 python3-flask \
 python3-numpy \
 v4l-utils \
 python3-opencv
 
+# Then run this
 pip3 install imutils
 ```
 
