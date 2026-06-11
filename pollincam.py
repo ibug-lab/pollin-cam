@@ -27,7 +27,7 @@ BURST_DELAY = 0.4
 
 # Base directory on USB drive
 # This will need to be adjusted to match the unit name/number
-BASE_SAVE_DIR = "/media/pollincam-01/"
+BASE_SAVE_DIR = "/home/ibuglab/pollincam-XX/"
 
 # ==================================================
 
