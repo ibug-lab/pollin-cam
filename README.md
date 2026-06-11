@@ -150,9 +150,9 @@ sudo nano /etc/fstab
 At the end of this file, add 
 
 ```bash
-UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx /home/ibuglab/pollincam-01 ext4 defaults,auto,users,rw,nofail 0 0
+UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx /home/ibuglab/pollincam-XX ext4 defaults,auto,users,rw,nofail 0 0
 ```
-replacing both the UUID with the one you just copied, and adjusting the file path to the directory we just created. 
+replacing both the UUID with the one you just copied, and adjusting the file path to the directory we just created (i.e., replace `pollincam-xx` with the correct name, e.g., `pollincam-04`)
 
 Next, we'll mount the drive:
 
