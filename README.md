@@ -130,10 +130,10 @@ This will open an interactive terminal menu that you can navigate. Start by Sync
 ### Using Gparted
 Launch screen sharing to the device via Raspberry Pi Connect. Under the Pi menu, go to System Tools and launch "GParted". From here, select the external drive from the dropdown in the upper right, and then select the partition. Go to partition --> unmount and then partition --> delete partition. Then, partition --> create partitition. Keep all the default settings and only enter the label, which should be the device name (e.g., `pollincam-01`). Once you're done with that, go to edit --> apply all operations. This will take a few minutes to create the new partition table on the device. 
 
-Next, we'll create the mounting point for the hard drive. Adjust the directory name below to match the device name.
+Next, we'll create the mounting point for the hard drive. Adjust the directory name below to match the device name (e.g., `pollincam-04`)
 
 ```bash
-mkdir pollincam-01
+mkdir pollincam-XX
 ```
 
 We'll now add the hard drive to the file system table (fstab). Run the following code, and copy the UUID for the hard drive we just partitioned.
