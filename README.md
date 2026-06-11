@@ -87,7 +87,7 @@ sudo sh install.sh
 After the installation, the installer will prompt you to reboot the pi. Do so, and then we'll setup the web interface to adjust the schedule for startup/shutdown. 
 
 ```bash
-sudo home/ibuglab/uwi/diagnose.sh
+sudo /home/ibuglab/uwi/diagnose.sh
 ```
 
 This will configure the web interface and provide the URL to access the Witty Pi device and enter the scheduling information. Once you have accessed the Witty Pi UI, select "Schedule Script" and paste in:
