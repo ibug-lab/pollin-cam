@@ -31,7 +31,7 @@ Prototype trap deployed | Trap imaging surface
 3. Mount the USB hub, ensuring the Pogo pins are correctly aligned (see [here](https://makerspot.com/stackable-usb-hub-for-raspberry-pi-zero/) for instructions.
 4. Plug in the USB thumb drive to any of the USB ports on the hub.
 
-## 2. Operating system and software 💿
+## 2. Operating system
 ### Imaging MicroSD card
 Use the Raspberry Pi Imager software to install the recommended operating system for the Raspberry Pi Zero 2W on the microSD card, but opt for the *32-bit* version of Debian Trixie for this particular iteration of the camera trap to save memory.
 
@@ -44,6 +44,7 @@ For customizations, you will need to define:
 5. Enable SSH using password authentication (this is to enable remote access using the device password above)
 6. Enable Raspberry Pi Connect (additional remote access capabilities including screen sharing). You will need to open and sign in to our lab's Raspberry Pi connect account in order to obtain the authentication token. Account details are in the iBUG Pi asset spreadsheet.
 
+##  3. Updates and software 💿
 ### Updates and dependency installation
 Once the microSD card is flashed with the OS, install it in the Pi and boot it up. If the Pi is auto-connecting to available hotspot or wifi, login to Raspberry Pi Connect and then login to the device using a remote shell connection (i.e., terminal window). If the device is not on the network, use a keyboard/mouse and monitor to open a terminal window and execute the following:
 
@@ -66,7 +67,7 @@ v4l-utils \
 python3-opencv
 ```
 
-## 3. Witty Pi 4 mini configuration 🔋
+## 4. Witty Pi 4 mini configuration 🔋
 
 ```bash
 wget https://www.uugear.com/repo/WittyPi4/install.sh
@@ -109,7 +110,7 @@ nano /home/ibuglab/wittypi/wittyPi.sh
 
 This will open an interactive terminal menu that you can navigate. Start by Synchronizing with network time (option 3), and then select "5. Choose schedule script". This will bring up a list of schedule scripts, and you should see the `all_day_0600_2000.wpi` file that we moved in. Select that script. It should load it, and configure the next startup and shutdown date and time. Double check that the next shutdown is today at 20:00 (8pm), and the next startup is tomorrow at 06:00 (6am). Next, select  "6. Set low voltage threshold". Enter 3 as the low voltage and save. You cna then exit (option 13). The WittyPi is now configured!
 
-## 4. External hard drive configuration (USB thumb-drive) 💽
+## 5. External hard drive configuration (USB thumb-drive) 💽
 ### Using terminal:
 
 The USB thumb drive we use contains 500gb of space where we will store all of our captured images. We'll first reformat/re-partition the drive and then modify a script to ensure the drive automounts each time the Pi boots up in the morning. 
@@ -196,7 +197,7 @@ sudo chmod a+rwx /home/ibuglab/pollincam-01/
 sudo chmod -R 775 /home/ibuglab/pollincam-01/
 ```
 
-## 5. Clone Github repository to the Pi
+## 6. Clone Github repository to the Pi
 Now we'll clone this repo to the Pi so that we have the requisite scripts to test and run both the DHT22 sensor (`dht22.py`) and camera trap script (`pollincam.py`).
 
 ```bash
@@ -207,7 +208,7 @@ Once cloned, we'll need to adjust the file paths in both the `dht22.py` and `pol
 
 This will create a directory (folder) inside our home folder called `pollin-cam` where our scripts will be housed. 
 
-## 6. DHT22 configuration 🌡️
+## 7. DHT22 configuration 🌡️
 The DHT22 is a temperature/humidity sensor to record environmental conditions at the trap. To configure it, first ensure that the sensor is correctly installed on the GPIO pins of the Pi (see diagram below). 
 
 <div align="center">
@@ -255,7 +256,9 @@ pip install adafruit-circuitpython-dht
 python home/ibuglab/pollin-cam/dht22.py # this starts the script
 ```
 
-## 7. Setup CRONTAB events for all camera trap scripts 📅
+If the terminal is reading out temperatures and humidities that make sense, great -- it's working! You can exit the script by entering `cntl+c`. 
+
+## 8. Setup CRONTAB events for all camera trap scripts 📅
 Using the Witty Pi will start up and shutdown the Pi automatically to save on battery overnight. Because of this, we'll need to configure our Pi to automatically start our camera trap and temperature/humidity sensor script automatically each time the Pi boots up in the morning. For this, we'll use crontab, which is a job scheduler.
 
 ```
