@@ -73,7 +73,7 @@ Now we'll clone this repo to the Pi so that we have the requisite scripts to tes
 git clone https://github.com/ibug-lab/pollin-cam.git
 ```
 
-Once cloned, we'll need to adjust the file paths in both the `dht22.py` and `pollincam.py` scripts. Open then using `nano` and adjust the file paths to the directory we just created above, should be something like: `/home/ibuglab/pollincam-01"
+Once cloned, we'll need to adjust the file paths in both the `dht22.py` and `pollincam.py` scripts. Open then using `nano` (e.g., `nano /home/ibuglab/pollin-cam/dht22.py`) and adjust the file paths to the directory we just created above, should be something like: `/home/ibuglab/pollincam-01"
 
 This will create a directory (folder) inside our home folder called `pollin-cam` where our scripts will be housed. 
 
