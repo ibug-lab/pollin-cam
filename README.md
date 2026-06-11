@@ -127,53 +127,8 @@ nano /home/ibuglab/wittypi/wittyPi.sh
 This will open an interactive terminal menu that you can navigate. Start by Synchronizing with network time (option 3), and then select "5. Choose schedule script". This will bring up a list of schedule scripts, and you should see the `all_day_0600_2000.wpi` file that we moved in. Select that script. It should load it, and configure the next startup and shutdown date and time. Double check that the next shutdown is today at 20:00 (8pm), and the next startup is tomorrow at 06:00 (6am). Next, select  "6. Set low voltage threshold". Enter 3 as the low voltage and save. You cna then exit (option 13). The WittyPi is now configured!
 
 ## 6. External hard drive configuration (USB thumb-drive) 💽
-### Using terminal:
-
-The USB thumb drive we use contains 500gb of space where we will store all of our captured images. We'll first reformat/re-partition the drive and then modify a script to ensure the drive automounts each time the Pi boots up in the morning. 
-
-First, confirm what the external drive is: 
-
-```bash
-lsblk
-```
-
-It *should* be `/dev/sda` (500GB disk) that has a single partition in it. Next, we'll delete the existing partitions and create a new one:
-
-```bash
-sudo parted -s /dev/sda mklabel gpt
-sudo parted -s /dev/sda mkpart primary ext4 0% 100%
-
-# adjust `pollincam-01` with appropriate unit name/number
-sudo mkfs.ext4 -L pollincam-01 /dev/sda1 
-```
-
-Now we'll create a mount point on the Pi for the device. Adjust the `pollincam-01` name a number appropriately. 
-
-```bash
-sudo mkdir -p /mnt/pollincam-01
-```
-
-Next, we'll add the device to to a file so that it automatically mounts upon startup. From this, copy the UUID of the device. The output will look like: `/dev/sda1: UUID="1234abcd-5678-efgh-9012-ijkl34567890" TYPE="ext4"`
-
-```bash
-sudo blkid /dev/sda1
-sudo nano /etc/fstab
-
-# To the fstab file, add this at the bottom (adjust UUID to match)
-UUID=1234abcd-5678-efgh-9012-ijkl34567890  /mnt/pollincam-01  ext4  defaults,nofail  0  2
-```
-
-Save and exit the fstab file, and then test the mount:
-
-```bash
-sudo mount -a
-df -h
-
-# Should see: /dev/sda1       500G  1G  499G   1% /mnt/pollincam-01
-```
-
 ### Using Gparted
-Launch screen sharing to the device via Raspberry Pi Connect. Under the Pi menu, go to System Tools and launch "GParted". From here, select the external drive from the dropdown in the upper right, and then select the partition. Go to partition --> delete partition. Then, partition --> create partitition. Keep all the default settings and only enter the label, which should be the device name (e.g., `pollincam-01`). Once you're done with that, go to edit --> apply all operations. This will take a few minutes to create the new partition table on the device. 
+Launch screen sharing to the device via Raspberry Pi Connect. Under the Pi menu, go to System Tools and launch "GParted". From here, select the external drive from the dropdown in the upper right, and then select the partition. Go to partition --> unmount and then partition --> delete partition. Then, partition --> create partitition. Keep all the default settings and only enter the label, which should be the device name (e.g., `pollincam-01`). Once you're done with that, go to edit --> apply all operations. This will take a few minutes to create the new partition table on the device. 
 
 Next, we'll create the mounting point for the hard drive. Adjust the directory name below to match the device name.
 
