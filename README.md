@@ -163,9 +163,9 @@ sudo mount -a
 And finally, update the folder permissions so that we can read and write. Adjust the directory name in each of these to match the device:
 
 ```bash
-sudo chown ibuglab:ibuglab -R /home/ibuglab/pollincam-01/
-sudo chmod a+rwx /home/ibuglab/pollincam-01/
-sudo chmod -R 775 /home/ibuglab/pollincam-01/
+sudo chown ibuglab:ibuglab -R /home/ibuglab/pollincam-XX/
+sudo chmod a+rwx /home/ibuglab/pollincam-XX/
+sudo chmod -R 775 /home/ibuglab/pollincam-XX/
 ```
 
 ## 7. DHT22 configuration 🌡️
