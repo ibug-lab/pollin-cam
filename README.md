@@ -73,7 +73,7 @@ wget https://www.uugear.com/repo/WittyPi4/install.sh
 sudo sh install.sh
 ```
 
-After the installation, we'll setup the web interface to adjust the schedule for startup/shutdown. 
+After the installation, the installer will prompt you to reboot the pi. Do so, and then we'll setup the web interface to adjust the schedule for startup/shutdown. 
 
 ```bash
 sudo home/ibuglab/uwi/diagnose.sh
@@ -94,6 +94,20 @@ OFF H10
 Click save, and then refresh the UI. You should now see the `Next Shutdown` and `Next Startup` with a time of 20:00 of the current day (for Next Shutdown) and 06:00 for the next day (for Next Startup). 
 
 Next, set the low voltage setting to 3V. This ensures that the Pi gracefully shuts down if/when the battery is drained and voltage begins to drop. 
+
+If the web interface isn't working, you can edit the schedule and adjust the low voltage setting using the terminal. First, we'll move our schedule file from our Github repo folder to the schedules folder inside our WittyPi:
+
+```bash
+mv /home/ibuglab/pollin-cam/all_day_0600_2000.wpi /home/ibuglab/wittypi/schedules/
+```
+
+Next, open up the `wittyPi.sh` file:
+
+```bash
+nano /home/ibuglab/wittypi/wittyPi.sh
+```
+
+This will open an interactive terminal menu that you can navigate. Start by Synchronizing with network time (option 3), and then select "5. Choose schedule script". This will bring up a list of schedule scripts, and you should see the `all_day_0600_2000.wpi` file that we moved in. Select that script. It should load it, and configure the next startup and shutdown date and time. Double check that the next shutdown is today at 20:00 (8pm), and the next startup is tomorrow at 06:00 (6am). Next, select  "6. Set low voltage threshold". Enter 3 as the low voltage and save. You cna then exit (option 13). The WittyPi is now configured!
 
 ## 4. External hard drive configuration (USB thumb-drive) 💽
 ### Using terminal:
