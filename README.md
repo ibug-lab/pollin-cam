@@ -66,8 +66,18 @@ python3-numpy \
 v4l-utils \
 python3-opencv
 ```
+## 4. Clone Github repository to the Pi
+Now we'll clone this repo to the Pi so that we have the requisite scripts to test and run both the DHT22 sensor (`dht22.py`) and camera trap script (`pollincam.py`).
 
-## 4. Witty Pi 4 mini configuration 🔋
+```bash
+git clone https://github.com/ibug-lab/pollin-cam.git
+```
+
+Once cloned, we'll need to adjust the file paths in both the `dht22.py` and `pollincam.py` scripts. Open then using `nano` and adjust the file paths to the directory we just created above, should be something like: `/home/ibuglab/pollincam-01"
+
+This will create a directory (folder) inside our home folder called `pollin-cam` where our scripts will be housed. 
+
+## 5. Witty Pi 4 mini configuration 🔋
 
 ```bash
 wget https://www.uugear.com/repo/WittyPi4/install.sh
@@ -110,7 +120,7 @@ nano /home/ibuglab/wittypi/wittyPi.sh
 
 This will open an interactive terminal menu that you can navigate. Start by Synchronizing with network time (option 3), and then select "5. Choose schedule script". This will bring up a list of schedule scripts, and you should see the `all_day_0600_2000.wpi` file that we moved in. Select that script. It should load it, and configure the next startup and shutdown date and time. Double check that the next shutdown is today at 20:00 (8pm), and the next startup is tomorrow at 06:00 (6am). Next, select  "6. Set low voltage threshold". Enter 3 as the low voltage and save. You cna then exit (option 13). The WittyPi is now configured!
 
-## 5. External hard drive configuration (USB thumb-drive) 💽
+## 6. External hard drive configuration (USB thumb-drive) 💽
 ### Using terminal:
 
 The USB thumb drive we use contains 500gb of space where we will store all of our captured images. We'll first reformat/re-partition the drive and then modify a script to ensure the drive automounts each time the Pi boots up in the morning. 
@@ -196,17 +206,6 @@ sudo chown ibuglab:ibuglab -R /home/ibuglab/pollincam-01/
 sudo chmod a+rwx /home/ibuglab/pollincam-01/
 sudo chmod -R 775 /home/ibuglab/pollincam-01/
 ```
-
-## 6. Clone Github repository to the Pi
-Now we'll clone this repo to the Pi so that we have the requisite scripts to test and run both the DHT22 sensor (`dht22.py`) and camera trap script (`pollincam.py`).
-
-```bash
-git clone https://github.com/ibug-lab/pollin-cam.git
-```
-
-Once cloned, we'll need to adjust the file paths in both the `dht22.py` and `pollincam.py` scripts. Open then using `nano` and adjust the file paths to the directory we just created above, should be something like: `/home/ibuglab/pollincam-01"
-
-This will create a directory (folder) inside our home folder called `pollin-cam` where our scripts will be housed. 
 
 ## 7. DHT22 configuration 🌡️
 The DHT22 is a temperature/humidity sensor to record environmental conditions at the trap. To configure it, first ensure that the sensor is correctly installed on the GPIO pins of the Pi (see diagram below). 
