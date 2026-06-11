@@ -90,7 +90,13 @@ After the installation, the installer will prompt you to reboot the pi. Do so, a
 sudo /home/ibuglab/uwi/diagnose.sh
 ```
 
-This will configure the web interface and provide the URL to access the Witty Pi device and enter the scheduling information. Once you have accessed the Witty Pi UI, select "Schedule Script" and paste in:
+This will configure the web interface and provide the URL to access the Witty Pi device and enter the scheduling information. When you first open the web UI, it will show an error that the witty pi software can't be found. This is because the configuration file has the incorrect username specified for our pi. To fix this, we'll open up that file, and replace "pi" in the file paths with "ibug". Run the following line, and then replace pi in the filepath with ibuglab in the 5 last lines of that configuration file. 
+
+```bash
+nano /home/ibuglab/uwi/uwi.conf
+```
+
+Return the to web interface and refresh. THe error should go away! Now that you have accessed the Witty Pi UI, select "Schedule Script" and paste in:
 
 ```
 # Define start and end to schedule
