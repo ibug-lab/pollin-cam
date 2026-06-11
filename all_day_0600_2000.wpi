@@ -1,0 +1,6 @@
+# Define start and end to schedule
+BEGIN 2026-06-01 06:00:00
+END   2035-12-31 20:00:00
+
+ON  H14
+OFF H10 
