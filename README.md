@@ -213,7 +213,7 @@ pip install adafruit-blinka
 pip install adafruit-circuitpython-dht
 
 # this runs the script to test if the sensor is working
-python home/ibuglab/pollin-cam/dht22.py # this starts the script
+python /home/ibuglab/pollin-cam/dht22.py # this starts the script
 ```
 
 If the terminal is reading out temperatures and humidities that make sense, great -- it's working! You can exit the script by entering `cntl+c`. 
