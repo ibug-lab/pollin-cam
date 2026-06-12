@@ -186,20 +186,6 @@ swig \
 liblgpio-dev
 ```
 
-Next, we'll adjust the raspberry pi configuration file to tell it which GPIO pin we're using. This is key as the WittyPi uses the default 1-wire pin.
-
-```bash
-sudo nano /boot/firmware/config.txt
-```
-
-To the end of this file, add:
-
-```bash
-dtoverlay=w1-gpio,gpiopin=27
-```
-
-Save and exit.
-
 Next, we'll create a virtual environment to run the script, install the packages that talk to the sensor, and test that it's working:
 
 ```bash
