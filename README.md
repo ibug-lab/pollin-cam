@@ -215,4 +215,28 @@ crontab -e
 @reboot sleep 60 && /usr/bin/python3 /home/ibuglab/pollin-cam/pollincam.py
 ```
 
-Save and exit the crontab. Our scripts are successfully scheduled to startup as soon as the Pi boots up in the morning (+ a 1 minute delay to ensure the device unit boots).  
+Save and exit the crontab. Our scripts are successfully scheduled to startup as soon as the Pi boots up in the morning (+ a 1 minute delay to ensure the device unit boots). 
+
+## 9. Add wifi hotspot as backup network in the field
+
+Open a terminal, and enter:
+
+```bash
+sudo nmcli connection add \
+  type wifi \
+  con-name "PhoneHotspot" \
+  ifname wlan0 \
+  ssid "YourHotspotSSID"
+```
+
+Replacing the "PhoneHotspot" with a name of your choice (e.g., "haidyn_hotspot") and replace the ssid line with your hotspot ssid (for iphone, this is the name of your iPhone: go to Settings -> General -> About to retrieve this.
+
+Next, add your password:
+
+```bash
+sudo nmcli connection modify "PhoneHotspot" \
+  wifi-sec.key-mgmt wpa-psk \
+  wifi-sec.psk "YourPassword"
+```
+
+Replacing "PhoneHotspot" with the name you entered above, and adjust the password to your hotspot password (this is visible/changeable in the Personal Hotspot settings on the iPhone.
