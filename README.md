@@ -225,7 +225,7 @@ Using the Witty Pi will start up and shutdown the Pi automatically to save on ba
 crontab -e
 
 # add this line to start the scripts after reboot with a 60 second delay
-@reboot sleep 60 && /home/ibuglab/dht-env/venv/bin/python /home/ibuglab/pollincam/dht22.py
+@reboot sleep 60 && /home/ibuglab/dht-env/bin/python /home/ibuglab/pollin-cam/dht22.py >> /home/ibuglab/pollincam-xx/dht22.log 2>&1
 @reboot sleep 60 && /usr/bin/python3 /home/ibuglab/pollin-cam/pollincam.py
 ```
 
