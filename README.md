@@ -240,3 +240,10 @@ sudo nmcli connection modify "PhoneHotspot" \
 ```
 
 Replacing "PhoneHotspot" with the name you entered above, and adjust the password to your hotspot password (this is visible/changeable in the Personal Hotspot settings on the iPhone.
+
+# Deploying in the field
+1. Boot the Pi and comment out the crontab event we added for the `pollincam.py` script. Doing this will allow us to open up a stream of the camera so that we can position it correctly.
+2. Shutdown the pi, and move into position in the field.
+3. Reboot the Pi, and use VNC to open up a camera stream to position the camera on the focal object (flower, attractant, etc.).
+4. Once the camera is positioned, open the crontab and uncomment the `pollincam.py` script. Reboot.
+5. The camera should now boot up, and begin recording both photos and temperature/humidity data. From here, the WittyPi schedule should take over shutdowns and power ups. 
